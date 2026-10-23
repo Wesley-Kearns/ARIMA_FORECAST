@@ -10,12 +10,12 @@ data RPMTEMP;
 
 run;
 
-TITLE "ARIMA ESTIMATES FOR QUARTERLY DATA";
+TITLE "ARIMA ESTIMATES FOR Monthly DATA";
 proc arima data = RPMTEMP;
 	identify var=lnRPM(1) nlag=20 stationarity= (adf=(1)) ;
 	estimate P=(6 12) Q=(2 13) method=ml plot; 
 	outlier maxnum=(24) alpha= 0.01;
-	forecast lead=12 interval=QUARTERLY id=DATE out=OUTFRPM alpha=.10; 
+	forecast lead=12 interval=Monthly id=DATE out=OUTFRPM alpha=.10; 
 run; 
 
 data RPMTEMP2;
